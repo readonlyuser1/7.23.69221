@@ -27,8 +27,10 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello ${{ inputs.name }} 
-        VAR=$(curl -s "https://search.maven.org/solrsearch/select?q=g:com.pvsstudio%20AND%20a:pvsstudio-maven-plugin&core=gav&rows=1&wt=json" | jq -r '.response.docs[0].v')
-        echo "$VAR" 
+      - name: List files in the repository
+        run: |
+          apt update
+          apt install curl -y
+          echo "Hello ${{ inputs.name }} 
+          VAR=$(curl -s "https://search.maven.org/solrsearch/select?q=g:com.pvsstudio%20AND%20a:pvsstudio-maven-plugin&core=gav&rows=1&wt=json" | jq -r '.response.docs[0].v')
+          echo "$VAR" 
